@@ -6,15 +6,19 @@ const ContactCard = () => {
   //example form structure
   const [contactDetail, setContactDetail] = React.useState([
     {
-      image: <img src="pic-url" alt="ProfilePic"/>,
+      image: (
+        <img
+          className="card-list__imgbox-img"
+          src="https://media.licdn.com/dms/image/C5103AQECRnzMVdGTtQ/profile-displayphoto-shrink_800_800/0/1556945828215?e=1683158400&v=beta&t=ShGaaPzOeuLYhcQDxYJWZuYr3TwbvsFlrUgFFBLgods"
+          alt="ProfilePic"
+        />
+      ),
       name: "Daniel",
       surname: "Fernandez",
       number: 722280416,
       id: 1,
     },
   ]);
-
-  console.log(contactDetail);
 
   //Hooking to object.
   const [newContact, setNewContact] = React.useState({
@@ -46,44 +50,72 @@ const ContactCard = () => {
     });
   };
 
+  //delete button
+
+
+
   return (
     <div className="agenda-main">
-    <h1 className="agenda-main__title">My agenda</h1>
-      
-      <div className="card">
+      <h1 className="agenda-main__title">My agenda</h1>
         {contactDetail.map((contact) => (
           <ContactList key={contact.id} contact={contact}></ContactList>
         ))}
-        <button className="card-delete">Delete</button>
-      </div>
 
+
+{/*AddContact*/}
       <div className="add-contact">
-        <form className="add-contact__form"
-        onSubmit={(event) => {
-          addNewContact(event);
-        }}>
+        <form
+          className="add-contact__form"
+          onSubmit={(event) => {
+            addNewContact(event);
+          }}
+        >
           <p>
             <label className="add-contact__field-label">Name: </label>
             <input
               className="add-contact__field-input"
+              name="name"
+              id="name"
               type="text"
               value={newContact.name}
+              onChange={(event) =>
+                setNewContact({
+                  ...newContact,
+                  name: event.target.value,
+                })
+              }
             />
           </p>
           <p>
             <label className="add-contact__field-input">Surname: </label>
             <input
               className="add-contact__field-input"
+              name="surname"
+              id="surname"
               type="text"
               value={newContact.surname}
+              onChange={(event) =>
+                setNewContact({
+                  ...newContact,
+                  surname: event.target.value,
+                })
+              }
             />
           </p>
           <p>
             <label className="add-contact__field-input">Number: </label>
             <input
               className="add-contact__field-input"
+              name="number"
+              id="number"
               type="number"
               value={newContact.number}
+              onChange={(event) =>
+                setNewContact({
+                  ...newContact,
+                  number: event.target.value,
+                })
+              }
             />
           </p>
           {/* <p>
@@ -92,12 +124,16 @@ const ContactCard = () => {
               className="add-contact__field-input"
               type="image"
               value={newContact.image}
-            />
+               onChange={(event) =>
+                setNewContact({
+                ...newContact,
+                number: event.target.value,
+                })}/>
           </p> */}
+          <button className="add-contact__btn" type="submit">
+            Add Contact
+          </button>
         </form>
-        <button className="add-contact__btn" type="submit">
-          Add Contact
-        </button>
       </div>
     </div>
   );
