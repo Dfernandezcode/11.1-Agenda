@@ -36,7 +36,7 @@ const ContactCard = () => {
 
     const newContactAdd = {
       ...newContact,
-      id: [contactDetail.length - 1].id + 1,
+      id: contactDetail.length +1,
     };
 
     setContactDetail([...contactDetail, newContactAdd]);
@@ -51,16 +51,33 @@ const ContactCard = () => {
   };
 
   //delete button
+// const deleteContact =React.useCallback ((contact) => {
+//     console.log("Deleting contact:", contact);
+//     const newContact = contactDetail.filter((item) => item.id !== contact.id);
+//     setContactDetail(newContact);
+//   }, [contactDetail]);
 
 
+const deleteContact = (contact) => {
+  console.log("Deleting contact:", contact);
+  const newContact = contactDetail.filter((item) => item.id !== contact.id);
+  setContactDetail(newContact);
+};
+
+const handleDelete = (contact) => {
+  deleteContact(contact);
+};
 
   return (
     <div className="agenda-main">
-      <h1 className="agenda-main__title">My agenda</h1>
+      <h1 className="agenda-main__title">My agenda: {contactDetail.length}</h1>
         {contactDetail.map((contact) => (
-          <ContactList key={contact.id} contact={contact}></ContactList>
+          <ContactList 
+          key={contact.id} 
+          contact={contact}
+          deleteContact={deleteContact}
+          ></ContactList>
         ))}
-
 
 {/*AddContact*/}
       <div className="add-contact">
@@ -113,7 +130,7 @@ const ContactCard = () => {
               onChange={(event) =>
                 setNewContact({
                   ...newContact,
-                  number: event.target.value,
+                  number: parseInt(event.target.value),
                 })
               }
             />

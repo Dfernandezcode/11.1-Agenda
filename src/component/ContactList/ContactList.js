@@ -1,8 +1,10 @@
-
 import React from "react";
+
 const ContactList = (props) => {
 
-  //Delete button?
+  const handleDelete = () => {
+    props.deleteContact(props.contact);
+  };
 
   return (
     <div className="card">
@@ -20,8 +22,8 @@ const ContactList = (props) => {
           <p className="card-list__details-text">
             <strong>Number: </strong>
             {props.contact.number}
+            <button onClick={handleDelete} className="card-delete">Delete</button>
           </p>
-          <button className="card-delete">Delete</button>
         </div>
       </div>
     </div>
