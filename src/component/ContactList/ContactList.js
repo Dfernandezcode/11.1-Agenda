@@ -6,8 +6,11 @@ const ContactList = (props) => {
     props.deleteContact(props.contact);
   };
 
+  // determine background color based on index
+  const backgroundColorClass = props.index % 2 === 0 ? "even" : "odd";
+
   return (
-    <div className="card">
+    <div className={`card--${backgroundColorClass}`}>
       <div className="card-list" key={props.contact.id}>
         <div className="card-list__imgbox">{props.contact.image}</div>
         <div className="card-list__details">
